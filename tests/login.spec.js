@@ -17,6 +17,15 @@ const password = [
     "evermos123",
 ]
 
+const querySearch = [
+    "kopi",
+    "",
+    "",
+    "",
+    "",
+    "",
+]
+
 async function loginValid(page,url) {
     var index = randomstring.generate({
         length: 1,
@@ -27,12 +36,13 @@ async function loginValid(page,url) {
     await page.getByPlaceholder('Nomor Telepon Anda').fill(phoneNumber[index]);
     await page.getByPlaceholder('Kata Sandi Anda').fill(password[index]);
     await page.getByRole('button', { name: 'Masuk' }).click();
-    await expect(page).toHaveURL(url+'catalog',6500) ;
+    await page.getByText('Jualan apa sekarang').waitFor()
+    await expect(page).toHaveURL(url+'catalog') ;
     return phoneNumber[index]
 }
 
 test.describe('Login Function', () => {
-    test('Login - Negative', async ({ page }) => {
+    test('Negative', async ({ page }) => {
         var index = randomstring.generate({
             length: 1,
             charset: '13'
@@ -46,7 +56,7 @@ test.describe('Login Function', () => {
         await expect(page).toHaveURL(URL+'login',2500) ;
     })
 
-    test('Login - Positive', async ({ page }) => {
+    test('Positive', async ({ page }) => {
         var phone = await loginValid(page,URL)
         await page.locator('.appNav__panel > a:nth-child(5)').click();
         await expect(page.getByText('+'+phone)).toBeVisible()
@@ -55,5 +65,22 @@ test.describe('Login Function', () => {
     
 })
 
-module.exports = { loginValid, URL }
+test.describe('Search Product', () => {
+    test('Positive', async ({ page }) => {
+        var index = randomstring.generate({
+            length: 1,
+            charset: '123456789'
+        })
+
+        await loginValid(page,URL)
+    
+        await page.getByRole('link', { name: 'Jualan apa sekarang ?' }).click();
+        await page.getByPlaceholder('Cari Produk di Evermos…').fill(querySearch [0]);
+        await page.getByPlaceholder('Cari Produk di Evermos…').press('Enter');
+        //await expect(page.getByRole('link', { name: querySearch[0] })).toBeVisible() 
+        await expect(page.locator('#__layout > div > div.appSection > div')).toBeVisible()
+        
+        await expect(page.getByRole('link', { name: /kopi/})).not.toHaveCount(0)
+    })
+})
 
