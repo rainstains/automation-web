@@ -1,0 +1,21 @@
+{
+  "name": "automation-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rainstains/automation-web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rainstains/automation-web/issues"
+  },
+  "homepage": "https://github.com/rainstains/automation-web#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.28.0"
+  }
+}
