@@ -1,6 +1,6 @@
-# automation-web
+# automation-web v1.0
 
-*Disclaimer: kadang test case order product failed ditengah jalan karna rto/page gak ke load jadi harus di ulangi testnya
+*note: kadang test case order product failed ditengah jalan karna rto/page gak ke load jadi harus di ulangi testnya
 
 bug:
 - beberapa locator terkadang suka ke skip
