@@ -17,5 +17,8 @@
   "homepage": "https://github.com/rainstains/automation-web#readme",
   "devDependencies": {
     "@playwright/test": "^1.28.0"
+  },
+  "dependencies": {
+    "randomstring": "^1.2.3"
   }
 }
